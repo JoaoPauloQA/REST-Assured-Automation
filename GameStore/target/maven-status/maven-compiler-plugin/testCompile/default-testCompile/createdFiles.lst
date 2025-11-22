@@ -1,0 +1,5 @@
+auth\LoginTest.class
+config\BaseTests.class
+payloads\AuthServices.class
+payloads\AuthPayloads.class
+validators\ResponseValidator.class
