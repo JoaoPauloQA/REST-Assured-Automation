@@ -1,5 +1,17 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# Allure results
+allure-results/
+allure-report/
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
