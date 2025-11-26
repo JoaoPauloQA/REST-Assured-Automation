@@ -5,112 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d58ab91b-6c59-45d4-b632-c2eb3709fa33" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/Factories/Userfactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/auth/RegisterTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/payloads/RegisterPayloads.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/payloads/RegisterServices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/auth/RegisterTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/test-classes/payloads/RegisterServices.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/controllers/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/controllers/authController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Backend/setup-users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/setup-users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/09a7e575-1cee-44cf-9cc7-281a03efff3c-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/09a7e575-1cee-44cf-9cc7-281a03efff3c-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/11d452a5-93e1-48b9-95c1-0e4de33a5f16-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/11d452a5-93e1-48b9-95c1-0e4de33a5f16-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/174bb6ad-d196-4528-8396-29bdc92bd65d-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/174bb6ad-d196-4528-8396-29bdc92bd65d-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/1cb19517-e3b6-43cc-a7fe-5bd52a5462c7-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/1cb19517-e3b6-43cc-a7fe-5bd52a5462c7-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/221f8087-58c5-4650-b665-4c93cb4d7026-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/221f8087-58c5-4650-b665-4c93cb4d7026-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/2363397b-84e1-4a44-85c8-d1078914e35f-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/2363397b-84e1-4a44-85c8-d1078914e35f-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/2886f381-ee3c-41a3-96d2-a0b522c51ca0-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/2886f381-ee3c-41a3-96d2-a0b522c51ca0-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/36f01e5e-2415-4364-ba23-8bc36b777bc2-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/36f01e5e-2415-4364-ba23-8bc36b777bc2-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/3d60020d-e122-4a8d-8062-8a859c302c25-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/3d60020d-e122-4a8d-8062-8a859c302c25-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/451ad2b0-2874-4019-beb8-b3cecaa9da6a-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/451ad2b0-2874-4019-beb8-b3cecaa9da6a-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/475afd6b-c2eb-4233-927d-10986812eabf-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/475afd6b-c2eb-4233-927d-10986812eabf-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/49857d74-9e2d-47d5-8373-69558e3ccbfd-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/49857d74-9e2d-47d5-8373-69558e3ccbfd-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/4f02b55b-d7be-41f0-a13e-d823f16ad018-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/4f02b55b-d7be-41f0-a13e-d823f16ad018-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/50ba593f-a100-4aae-b4a6-eaba10508f18-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/50ba593f-a100-4aae-b4a6-eaba10508f18-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/592030c4-a99a-4a66-975c-77ad5fe20acd-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/592030c4-a99a-4a66-975c-77ad5fe20acd-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/5969671b-044e-4982-8670-ffbd3e983e3e-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/5969671b-044e-4982-8670-ffbd3e983e3e-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/59bfe78e-17b2-41df-9810-53682c051fb4-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/59bfe78e-17b2-41df-9810-53682c051fb4-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/5b083173-4252-4e0f-b8f2-38c694331b89-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/5b083173-4252-4e0f-b8f2-38c694331b89-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/5c5b6c7d-d705-4e1f-aefc-f1390de11bb2-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/5c5b6c7d-d705-4e1f-aefc-f1390de11bb2-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/6e4b9966-c678-404a-b269-17c5f204a429-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/6e4b9966-c678-404a-b269-17c5f204a429-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/6ff5d1e3-921a-4b36-9d9f-477d7d6d672e-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/6ff5d1e3-921a-4b36-9d9f-477d7d6d672e-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/7a50a65b-266e-420a-9ca2-bd80fd9afe54-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/7a50a65b-266e-420a-9ca2-bd80fd9afe54-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/7c29780f-f82f-4164-9eb6-80482fa6916c-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/7c29780f-f82f-4164-9eb6-80482fa6916c-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/8386715e-97d5-41cc-8099-71a5a3450bb9-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/8386715e-97d5-41cc-8099-71a5a3450bb9-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/940ea316-1b15-41a4-94bd-a00b74c27dea-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/940ea316-1b15-41a4-94bd-a00b74c27dea-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/956703af-06dc-406a-a396-b995ef7f7a0e-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/956703af-06dc-406a-a396-b995ef7f7a0e-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/996f4ea2-474d-4b75-9660-9b65d2ea7bea-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/996f4ea2-474d-4b75-9660-9b65d2ea7bea-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/9be6009d-6f84-40a6-a2c0-6197a2d79a4a-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/9be6009d-6f84-40a6-a2c0-6197a2d79a4a-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/a70386c4-43f8-41b5-aa90-0f93b9e8db89-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/a70386c4-43f8-41b5-aa90-0f93b9e8db89-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/a8445dd1-1d71-4963-817b-666ff1d762f5-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/a8445dd1-1d71-4963-817b-666ff1d762f5-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/a97f65bd-7ce9-4acc-b6a7-eaedd3c38715-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/a97f65bd-7ce9-4acc-b6a7-eaedd3c38715-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/aea55991-cc88-4679-be6d-c6dd89c80fb4-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/aea55991-cc88-4679-be6d-c6dd89c80fb4-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/aecb4903-8da4-4dc8-bc98-4c04f64b0e26-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/aecb4903-8da4-4dc8-bc98-4c04f64b0e26-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/afa43390-f846-4c52-ba51-efbd90f80c03-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/afa43390-f846-4c52-ba51-efbd90f80c03-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/b04e2842-f5c1-40f4-ad34-16aa56a6eb54-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/b04e2842-f5c1-40f4-ad34-16aa56a6eb54-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/b2b002a9-d520-4f79-9b38-1a4ccfd7ffc2-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/b2b002a9-d520-4f79-9b38-1a4ccfd7ffc2-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/b58eb26f-0700-4fdc-8879-3025fbd5ce27-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/b58eb26f-0700-4fdc-8879-3025fbd5ce27-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/baf140f6-43a5-4d2c-994e-107a945ba575-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/baf140f6-43a5-4d2c-994e-107a945ba575-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/c02c7a1e-1957-4385-8c24-fa40c1aab6a0-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/c02c7a1e-1957-4385-8c24-fa40c1aab6a0-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/c0c6ac83-f182-4aa0-be38-790ed53f87f4-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/c0c6ac83-f182-4aa0-be38-790ed53f87f4-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/c60d5b63-f5d7-4d82-b286-938dbe565495-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/c60d5b63-f5d7-4d82-b286-938dbe565495-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/c81534e2-8f17-405c-ad2f-76aa1c2a9525-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/c81534e2-8f17-405c-ad2f-76aa1c2a9525-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/d719a367-b57d-427b-90f4-b386d8996bb5-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/d719a367-b57d-427b-90f4-b386d8996bb5-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/db50254b-fa74-4890-8d13-a158074969bc-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/db50254b-fa74-4890-8d13-a158074969bc-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/dee76caf-fb62-473e-b9b3-b058135428a3-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/dee76caf-fb62-473e-b9b3-b058135428a3-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/e33d736c-15d0-47cd-8a8c-0be460430295-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/e33d736c-15d0-47cd-8a8c-0be460430295-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/e5920db4-8623-4e66-ad5e-bf34ab1228f9-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/e5920db4-8623-4e66-ad5e-bf34ab1228f9-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/e67e8a2a-56da-4b7f-adbb-79d731072160-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/e67e8a2a-56da-4b7f-adbb-79d731072160-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/ebce5f55-54fb-4a0d-beb3-220d3af53fd9-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/ebce5f55-54fb-4a0d-beb3-220d3af53fd9-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/ec804e42-1ec0-46ed-a86c-fdec2e64b6c1-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/ec804e42-1ec0-46ed-a86c-fdec2e64b6c1-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/ee9aea09-2aaa-49b5-90c3-3fb3cd720ba0-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/ee9aea09-2aaa-49b5-90c3-3fb3cd720ba0-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/f07cdaec-e69e-45f2-85b4-a40a2d8c89bb-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/f07cdaec-e69e-45f2-85b4-a40a2d8c89bb-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/f5d3466f-8b41-47ac-a766-0c83d1bceaf3-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/f5d3466f-8b41-47ac-a766-0c83d1bceaf3-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/f7bc323a-dc22-41a8-b6ba-7b4c639c2e49-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/f7bc323a-dc22-41a8-b6ba-7b4c639c2e49-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/f9d4f3f8-8aa0-4485-985f-2b8346de1a06-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/f9d4f3f8-8aa0-4485-985f-2b8346de1a06-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/allure-results/fa32914c-dcc7-4a68-92db-8332e509eca3-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-results/fa32914c-dcc7-4a68-92db-8332e509eca3-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/main/java/br/com/gamestore/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/gamestore/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/auth/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/auth/LoginTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/auth/RegisterTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/config/BaseTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/config/BaseTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/payloads/AuthPayloads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/payloads/AuthPayloads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/payloads/AuthServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/payloads/AuthServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/payloads/RegisterServices.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/src/test/java/validators/ResponseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/validators/ResponseValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/0abafaa5-b1ef-4b18-9337-c4aefd1801fa-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/0abafaa5-b1ef-4b18-9337-c4aefd1801fa-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/54e15c6c-6172-4962-87ed-169cb479eee5-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/54e15c6c-6172-4962-87ed-169cb479eee5-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/79eaee62-7801-48d0-b987-762b5bdaf4f4-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/79eaee62-7801-48d0-b987-762b5bdaf4f4-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/8249acc7-e55e-4cde-add3-0e00e79d4009-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/8249acc7-e55e-4cde-add3-0e00e79d4009-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/b2cf3eaa-b6b8-4569-a665-2ce341a9001e-result.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/b2cf3eaa-b6b8-4569-a665-2ce341a9001e-result.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/dd6af135-19b1-43d1-8fd3-479bc49c93c1-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/dd6af135-19b1-43d1-8fd3-479bc49c93c1-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/allure-results/e61b415e-125b-491a-8653-fef2cb2ffea2-container.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/allure-results/e61b415e-125b-491a-8653-fef2cb2ffea2-container.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/classes/br/com/gamestore/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/gamestore/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/surefire-reports/2025-11-20T12-26-16_852.dumpstream" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/2025-11-20T12-26-16_852.dumpstream" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/surefire-reports/TEST-auth.LoginTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-auth.LoginTest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/surefire-reports/auth.LoginTest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/auth.LoginTest.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/auth/LoginTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/auth/LoginTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/auth/RegisterTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/config/BaseTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/config/BaseTests.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/payloads/AuthPayloads.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/payloads/AuthPayloads.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/payloads/AuthServices.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/payloads/AuthServices.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/payloads/RegisterServices.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/utils/Utils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameStore/target/test-classes/validators/ResponseValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/validators/ResponseValidator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../database/schema.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -126,7 +22,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -136,25 +32,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.LoginTest.deveLogarComSucesso.executor": "Run",
-    "JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody.executor": "Run",
-    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroDuplicado.executor": "Run",
-    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroEmailDuplicado.executor": "Run",
-    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroNegativo.executor": "Run",
-    "JUnit.RegisterTest.deveRegistrarComEmailUnico.executor": "Run",
-    "JUnit.RegisterTest.deveRegistrarComSucesso.executor": "Run",
-    "JUnit.RegisterTest.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/GameStore/GameStore"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.LoginTest.deveLogarComSucesso.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroDuplicado.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroEmailDuplicado.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroNegativo.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.deveRegistrarComEmailUnico.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.deveRegistrarComSucesso.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RegisterTest.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GameStore/GameStore&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\GameStore\GameStore" />
