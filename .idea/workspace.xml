@@ -32,31 +32,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.LoginTest.deveLogarComSucesso.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroDuplicado.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroEmailDuplicado.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.deveExibirMensagemDeErroRegistroNegativo.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.deveRegistrarComEmailUnico.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.deveRegistrarComSucesso.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.RegisterTest.executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/GameStore/GameStore&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.LoginTest.deveLogarComSucesso.executor": "Run",
+    "JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody.executor": "Run",
+    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroDuplicado.executor": "Run",
+    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroEmailDuplicado.executor": "Run",
+    "JUnit.RegisterTest.deveExibirMensagemDeErroRegistroNegativo.executor": "Run",
+    "JUnit.RegisterTest.deveRegistrarComEmailUnico.executor": "Run",
+    "JUnit.RegisterTest.deveRegistrarComSucesso.executor": "Run",
+    "JUnit.RegisterTest.executor": "Run",
+    "Maven.api-test [clean,install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/GameStore/GameStore"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\GameStore\GameStore" />
       <recent name="D:\GameStore\tests\GameStore" />
       <recent name="D:\GameStore\tests" />
     </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
   </component>
   <component name="RunManager" selected="JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody">
     <configuration name="RegisterTest.DeveexibirMensagemDeErroRegistroSemBody" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">

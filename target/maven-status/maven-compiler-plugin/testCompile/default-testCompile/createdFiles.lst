@@ -1,5 +1,10 @@
+auth\RegisterTest.class
+utils\Utils.class
+payloads\RegisterPayloads.class
+validators\ResponseValidator.class
 auth\LoginTest.class
 config\BaseTests.class
 payloads\AuthServices.class
 payloads\AuthPayloads.class
-validators\ResponseValidator.class
+payloads\RegisterServices.class
+Factories\Userfactory.class
