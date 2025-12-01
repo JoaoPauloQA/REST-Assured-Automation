@@ -1,60 +1,131 @@
-name: Rest Assured API Tests
+name: CI/CD Pipeline - GameStore Backend + Testes Rest Assured
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master, main ]
   pull_request:
-    branches:
-      - master
+    branches: [ master, main ]
+  workflow_dispatch:
 
 jobs:
-  run-api-tests:
+  test-backend:
+    name: 🧪 Testes Backend + Rest Assured
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: gamestore_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - name: Checkout repository
+      # Checkout
+      - name: 📥 Checkout código
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      # Node.js
+      - name: 🟢 Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: Backend/package-lock.json
+
+      # Instalar dependências do backend
+      - name: 📦 Instalar dependências do Backend
+        working-directory: ./Backend
+        run: npm ci
+
+      # Criar .env
+      - name: ⚙️ Criar arquivo .env
+        working-directory: ./Backend
+        run: |
+          echo "DATABASE_URL=postgresql://postgres:testpassword@localhost:5432/gamestore_test" > .env
+          echo "JWT_SECRET=${{ secrets.JWT_SECRET || 'ci-secret-key' }}" >> .env
+          echo "PORT=3000" >> .env
+          echo "RAWG_API_KEY=${{ secrets.RAWG_API_KEY || '' }}" >> .env
+          cat .env
+
+      # Criar tabelas SQL
+      - name: 🗄️ Criar Tabelas no PostgreSQL
+        working-directory: ./Backend
+        run: |
+          sleep 5
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f RECREATE-DATABASE.sql
+
+      # Start backend
+      - name: 🚀 Iniciar Backend
+        working-directory: ./Backend
+        run: |
+          nohup npm start > backend.log 2>&1 &
+          echo $! > backend.pid
+          echo "Backend iniciado com PID: $(cat backend.pid)"
+
+      # Esperar API ficar online
+      - name: ⏳ Aguardar backend subir
+        run: |
+          npm install -g wait-on
+          wait-on http://localhost:3000/api/jogos
+          echo "Servidor está online!"
+
+      # Setup Java
+      - name: ☕ Setup Java 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
+          cache: 'maven'
 
-      - name: Cache Maven
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-m2
+      # Executar testes REST Assured
+      - name: 🧪 Executar testes Rest Assured
+        run: mvn clean test -Dtest.api.url=http://localhost:3000
+        continue-on-error: false
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: Clone backend project
-        run: git clone https://github.com/JoaoPauloQA/ProjetoGameStore.git backend
-
-      - name: Install backend dependencies
-        working-directory: backend
-        run: npm install
-
-      - name: Start backend server
-        working-directory: backend
+      # Gerar Allure
+      - name: 📊 Gerar Allure Report
+        if: always()
         run: |
-          nohup node server.js > server.log 2>&1 &
+          if [ -d "target/allure-results" ]; then
+            npm install -g allure-commandline --unsafe-perm=true
+            allure generate target/allure-results -o target/allure-report --clean
+          else
+            echo "⚠ Nenhum resultado do Allure encontrado."
+          fi
+        continue-on-error: true
 
-      - name: Wait for backend to start
-        run: npx wait-on http://localhost:3000
-
-      - name: Run tests
-        run: mvn clean test
-
-      - name: Upload Allure Results
+      # Upload Allure report
+      - name: 📤 Upload Allure Report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results
-          path: ./allure-results
+          name: allure-report
+          path: target/allure-report
+          retention-days: 30
+
+      # Upload logs do backend quando falhar
+      - name: 📤 Upload logs do backend
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-logs
+          path: Backend/backend.log
+          retention-days: 7
+
+      # Finalizar servidor
+      - name: 🛑 Parar servidor Backend
+        if: always()
+        working-directory: ./Backend
+        run: |
+          if [ -f backend.pid ]; then
+            kill $(cat backend.pid) || true
+            rm backend.pid
+            echo "Servidor parado"
+          fi
