@@ -35,12 +35,15 @@ jobs:
         with:
           node-version: "18"
 
+      - name: Clone backend project
+        run: git clone https://github.com/JoaoPauloQA/ProjetoGameStore.git backend
+
       - name: Install backend dependencies
-        working-directory: Backend
+        working-directory: backend
         run: npm install
 
       - name: Start backend server
-        working-directory: Backend
+        working-directory: backend
         run: |
           nohup node server.js > server.log 2>&1 &
 
