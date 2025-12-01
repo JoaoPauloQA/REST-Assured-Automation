@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d58ab91b-6c59-45d4-b632-c2eb3709fa33" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Backend/controllers/authController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/controllers/authController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Backend/setup-users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../Backend/setup-users.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../database/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../database/schema.sql" afterDir="false" />
-    </list>
+    <list default="true" id="d58ab91b-6c59-45d4-b632-c2eb3709fa33" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -22,7 +18,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
@@ -42,6 +38,7 @@
     "JUnit.RegisterTest.deveRegistrarComEmailUnico.executor": "Run",
     "JUnit.RegisterTest.deveRegistrarComSucesso.executor": "Run",
     "JUnit.RegisterTest.executor": "Run",
+    "Maven. [clean,test].executor": "Run",
     "Maven.api-test [clean,install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -49,7 +46,8 @@
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/GameStore/GameStore"
+    "last_opened_file_path": "D:/GameStoreTESTS",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -62,9 +60,10 @@
   <component name="RunAnythingCache">
     <option name="myCommands">
       <command value="mvn clean install" />
+      <command value="mvn clean test" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody">
+  <component name="RunManager" selected="JUnit.RegisterTest.deveRegistrarComSucesso">
     <configuration name="RegisterTest.DeveexibirMensagemDeErroRegistroSemBody" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="api-test" />
       <extension name="coverage">
@@ -147,20 +146,13 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RegisterTest.deveRegistrarComSucesso" />
         <item itemvalue="JUnit.RegisterTest.DeveexibirMensagemDeErroRegistroSemBody" />
         <item itemvalue="JUnit.RegisterTest.deveExibirMensagemDeErroRegistroEmailDuplicado" />
         <item itemvalue="JUnit.RegisterTest.deveExibirMensagemDeErroRegistroDuplicado" />
         <item itemvalue="JUnit.RegisterTest.deveExibirMensagemDeErroRegistroNegativo" />
-        <item itemvalue="JUnit.RegisterTest.deveRegistrarComSucesso" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.25557.131" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

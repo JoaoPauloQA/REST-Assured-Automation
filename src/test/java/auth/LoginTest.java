@@ -7,7 +7,9 @@ import validators.ResponseValidator;
 import static org.hamcrest.Matchers.*;
 
 import org.junit.jupiter.api.Test;
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 
 @Epic("Autenticação")
 @Feature("Login")
@@ -21,7 +23,7 @@ public class LoginTest extends BaseTests {
 
     @Test
     @Story("Login bem-sucedido")
-    public void deveLogarComSucesso() {
+    public void deveLogarComSucesso(){
 
         Response response = auth.fazerLogin("qa_user@gamestore.com", "123456");
         validator.validarStatusCode(response,200);
