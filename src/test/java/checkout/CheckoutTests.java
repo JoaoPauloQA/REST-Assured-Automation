@@ -25,9 +25,7 @@ public class CheckoutTests  extends BaseTests {
          // Login API
         Response response = auth.fazerLogin("qa_user@gamestore.com", "123456");
         token = auth.extrairToken(response);
-
-
-        Response Checkout = checkout.realizarCheckout(token);
+        
 
 
 
