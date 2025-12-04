@@ -88,13 +88,20 @@ jobs:
           echo "⏳ Aguardando PostgreSQL estar totalmente pronto..."
           sleep 10
           
+          echo "🔍 Testando conexão com PostgreSQL..."
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "SELECT version();"
+          
+          echo ""
           echo "📋 Executando RECREATE-DATABASE.sql..."
           PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f RECREATE-DATABASE.sql
           
-          echo "✅ Tabelas criadas com sucesso!"
-          
-          echo "🔍 Verificando tabelas criadas..."
+          echo ""
+          echo "✅ SQL executado! Verificando tabelas criadas..."
           PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "\dt"
+          
+          echo ""
+          echo "🔍 Verificando se tabela 'jogos' tem dados..."
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "SELECT COUNT(*) as total_jogos FROM jogos;"
 
       # ========================================
       # STEP 6: INICIAR SERVIDOR BACKEND
@@ -108,31 +115,89 @@ jobs:
           
           echo "✅ Servidor iniciado com PID: $(cat backend.pid)"
           echo "📋 Aguardando inicialização..."
-          sleep 5
+          sleep 10
+          
+          echo "📋 Primeiras linhas do log:"
+          head -n 20 backend.log || echo "Log ainda não disponível"
 
       # ========================================
       # STEP 7: AGUARDAR BACKEND FICAR ONLINE
       # ========================================
       - name: ⏳ Aguardar servidor estar online
+        working-directory: ./Backend
         run: |
-          echo "⏳ Aguardando endpoint /api/jogos responder..."
-          npx wait-on http://localhost:3000/api/jogos -t 60000 -i 2000 -v
-          echo "✅ Backend está online e respondendo!"
+          echo "⏳ Aguardando servidor inicializar..."
+          
+          # Aguardar até 60 segundos
+          for i in {1..30}; do
+            echo "Tentativa $i/30..."
+          
+            # Verificar se o processo ainda está rodando
+            if [ -f backend.pid ]; then
+              PID=$(cat backend.pid)
+              if ! kill -0 $PID 2>/dev/null; then
+                echo "❌ ERRO: Servidor morreu!"
+                echo "📋 Logs completos:"
+                cat backend.log
+                exit 1
+              fi
+            fi
+          
+            # Testar endpoint
+            if curl -f http://localhost:3000/api/jogos 2>/dev/null; then
+              echo "✅ Backend está online e respondendo!"
+              exit 0
+            fi
+          
+            # Mostrar últimas linhas do log a cada 5 tentativas
+            if [ $((i % 5)) -eq 0 ]; then
+              echo "📋 Últimas linhas do log:"
+              tail -n 10 backend.log 2>/dev/null || echo "Log ainda vazio"
+            fi
+          
+            sleep 2
+          done
+          
+          echo "❌ Timeout: Servidor não ficou online em 60s"
+          echo "📋 Logs completos do backend:"
+          cat backend.log
+          exit 1
 
       # ========================================
       # STEP 8: TESTAR API COM CURL (SMOKE TEST)
       # ========================================
       - name: 🧪 Smoke test da API
+        working-directory: ./Backend
         run: |
+          echo "========================================="
+          echo "📋 LOGS DO BACKEND ANTES DOS TESTES"
+          echo "========================================="
+          cat backend.log
+          echo ""
+          echo "========================================="
+          
           echo "🧪 Testando endpoint GET /api/jogos..."
-          curl -f http://localhost:3000/api/jogos | jq '.' || echo "API respondeu sem JSON"
+          RESPONSE=$(curl -s -w "\n%{http_code}" http://localhost:3000/api/jogos)
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n 1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+          
+          echo "Status HTTP: $HTTP_CODE"
+          echo "Resposta: $BODY"
+          
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo ""
+            echo "❌ ERRO: API retornou status $HTTP_CODE"
+            echo "📋 Logs completos do backend:"
+            cat backend.log
+            exit 1
+          fi
           
           echo ""
           echo "🧪 Testando endpoint de autenticação..."
           curl -X POST http://localhost:3000/api/auth/login \
             -H "Content-Type: application/json" \
             -d '{"email":"admin@gamestore.com","password":"123456"}' \
-            | jq '.' || echo "Login endpoint OK"
+            -s | jq '.' || echo "Login respondeu"
           
           echo ""
           echo "✅ Smoke tests concluídos!"
