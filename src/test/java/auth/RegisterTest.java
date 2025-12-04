@@ -6,6 +6,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Order;
 
 import Factories.Userfactory;
 import payloads.RegisterServices;
@@ -13,6 +14,7 @@ import validators.ResponseValidator;
 
 @Epic("Autenticação")
 @Feature("Registro")
+@Order(1)
 public class RegisterTest extends BaseTests {
 
     ResponseValidator validator = new ResponseValidator();
@@ -20,6 +22,7 @@ public class RegisterTest extends BaseTests {
 
     @Test
     @Story("Registro bem sucedido")
+    @Order(1)
     public void deveRegistrarComSucesso() {
 
         String username = Userfactory.gerarUsername();
@@ -38,6 +41,7 @@ public class RegisterTest extends BaseTests {
 
   @Test
     @Story("RegistroEmailInvalido")
+  @Order(2)
     public void deveExibirMensagemDeErroRegistroNegativo() {
 
        String body = Userfactory.registroEmailInvalido();
@@ -50,6 +54,7 @@ public class RegisterTest extends BaseTests {
 
   @Test
     @Story("RegistroEmailDuplicado")
+  @Order(3)
     public void deveExibirMensagemDeErroRegistroEmailDuplicado() {
 
         String body = Userfactory.registroEmailDuplicado();
@@ -61,6 +66,7 @@ public class RegisterTest extends BaseTests {
 
 @Test
     @Story("RegistroUsernameDuplicado")
+@Order(4)
     public void DeveexibirMensagemDeErroRegistroSemBody() {
 
         String body = Userfactory.registroSemBody();
