@@ -104,6 +104,18 @@ jobs:
           echo ""
           echo "🔍 Verificando se tabela 'jogos' tem dados..."
           PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "SELECT COUNT(*) as total_jogos FROM jogos;"
+          
+             # ========================================
+      # STEP 5.1: EXECUTAR SEED DO BANCO DE TESTES
+      # ========================================
+      - name: 🌱 Executar SEED (usuário fixo + duplicado)
+        working-directory: .
+        run: |
+          echo "🌱 Executando seed.sql no PostgreSQL..."
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f Backend/src/test/resources/seed.sql
+
+          echo "📋 Usuários criados:"
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "SELECT id, username, email FROM usuarios;"
 
       # ========================================
       # STEP 6: INICIAR SERVIDOR BACKEND
