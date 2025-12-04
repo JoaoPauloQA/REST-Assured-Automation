@@ -1,4 +1,4 @@
 package payloads;
 
-public class CheckoutPayloads {
+public class CarrinhoPayload {
 }

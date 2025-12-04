@@ -1,0 +1,998 @@
+openapi: 3.0.3
+info:
+  title: GameStore API
+  description: |
+    API REST para e-commerce de jogos digitais.
+    
+    ## Autenticação
+    A maioria dos endpoints de autenticação e compras requerem um token JWT no header `Authorization`.
+    
+    Formato: `Authorization: Bearer <token>`
+    
+    ## Fluxo de Autenticação
+    1. **Registrar:** `POST /api/auth/register`
+    2. **Login:** `POST /api/auth/login` (retorna token)
+    3. **Usar token:** Adicione no header das requisições protegidas
+    
+    ## Base URL
+    - **Desenvolvimento:** http://localhost:3000
+    - **Produção:** https://seu-dominio.railway.app
+  version: 1.0.0
+  contact:
+    name: GameStore Support
+    email: admin@gamestore.com
+  license:
+    name: ISC
+    
+servers:
+  - url: http://localhost:3000
+    description: Servidor de desenvolvimento
+  - url: https://seu-dominio.railway.app
+    description: Servidor de produção (Railway)
+
+tags:
+  - name: Jogos
+    description: Catálogo de jogos e produtos
+  - name: Autenticação
+    description: Registro, login e gerenciamento de tokens JWT
+  - name: Compras
+    description: Checkout e histórico de compras
+  - name: Usuário
+    description: Informações da conta do usuário
+  - name: RAWG API
+    description: Integração com API externa de jogos
+  - name: Suporte
+    description: Tickets de suporte
+
+paths:
+  /api/jogos:
+    get:
+      tags:
+        - Jogos
+      summary: Listar todos os jogos
+      description: Retorna todos os jogos do catálogo ordenados por ID
+      operationId: getJogos
+      responses:
+        '200':
+          description: Lista de jogos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jogo'
+              example:
+                - id: 1
+                  title: "GTA V"
+                  price: 89.90
+                  platforms: ["pc", "ps", "xbox"]
+                  image: "https://example.com/gta5.jpg"
+                  plays: 1200000
+                - id: 2
+                  title: "The Witcher 3"
+                  price: 59.90
+                  platforms: ["pc", "ps"]
+                  image: "https://example.com/witcher3.jpg"
+                  plays: 890000
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/games:
+    get:
+      tags:
+        - Jogos
+      summary: Listar todos os jogos (alias)
+      description: Alias para /api/jogos (compatibilidade)
+      operationId: getGames
+      responses:
+        '200':
+          description: Lista de jogos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jogo'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/jogos/recomendado:
+    get:
+      tags:
+        - Jogos
+      summary: Obter jogo recomendado
+      description: Retorna 1 jogo aleatório do catálogo
+      operationId: getJogoRecomendado
+      responses:
+        '200':
+          description: Jogo recomendado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 5
+                  title:
+                    type: string
+                    example: "Baldur's Gate 3"
+                  price:
+                    type: number
+                    format: float
+                    example: 89.90
+                  image:
+                    type: string
+                    example: "https://example.com/baldurs-gate-3.jpg"
+        '404':
+          description: Nenhum jogo encontrado
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/games/count:
+    get:
+      tags:
+        - Jogos
+      summary: Contar total de jogos
+      description: Retorna o número total de jogos no catálogo
+      operationId: getGamesCount
+      responses:
+        '200':
+          description: Total de jogos
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    example: 14
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/gamepass:
+    get:
+      tags:
+        - Jogos
+      summary: Listar produtos Game Pass
+      description: Retorna todos os produtos do Xbox Game Pass
+      operationId: getGamePass
+      responses:
+        '200':
+          description: Lista de produtos Game Pass
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jogo'
+              example:
+                - id: 11
+                  title: "XBOX Gamepass 3 meses"
+                  price: 89.90
+                  platforms: ["xbox"]
+                  image: "https://example.com/gamepass.jpg"
+                  plays: 0
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/games/search:
+    get:
+      tags:
+        - Jogos
+      summary: Buscar jogos por título
+      description: Busca jogos cujo título contenha a query (typeahead)
+      operationId: searchGames
+      parameters:
+        - name: q
+          in: query
+          description: Termo de busca
+          required: true
+          schema:
+            type: string
+            example: "witcher"
+        - name: limit
+          in: query
+          description: Número máximo de resultados (máx 30)
+          schema:
+            type: integer
+            default: 8
+            maximum: 30
+      responses:
+        '200':
+          description: Resultados da busca
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    price:
+                      type: number
+                    image:
+                      type: string
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/top-played:
+    get:
+      tags:
+        - Jogos
+      summary: Jogos mais jogados
+      description: Retorna os jogos com mais plays
+      operationId: getTopPlayed
+      parameters:
+        - name: limit
+          in: query
+          description: Número de jogos a retornar
+          schema:
+            type: integer
+            default: 5
+      responses:
+        '200':
+          description: Lista de jogos mais jogados
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Jogo'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/games/{id}/details:
+    get:
+      tags:
+        - Jogos
+      summary: Detalhes de um jogo (RAWG)
+      description: Retorna detalhes de um jogo via API RAWG
+      operationId: getGameDetails
+      parameters:
+        - name: id
+          in: path
+          description: ID do jogo na API RAWG
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Detalhes do jogo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description_raw:
+                    type: string
+                  genres:
+                    type: array
+                    items:
+                      type: string
+                  platforms:
+                    type: array
+                    items:
+                      type: string
+                  rating:
+                    type: number
+                  background_image:
+                    type: string
+        '502':
+          description: Erro ao consultar API RAWG
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/rawg-games:
+    get:
+      tags:
+        - RAWG API
+      summary: Buscar jogos na API RAWG
+      description: Proxy para API RAWG de jogos
+      operationId: getRawgGames
+      parameters:
+        - name: search
+          in: query
+          description: Termo de busca
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          description: Itens por página
+          schema:
+            type: integer
+            default: 10
+        - name: page
+          in: query
+          description: Número da página
+          schema:
+            type: integer
+            default: 1
+      responses:
+        '200':
+          description: Resultados da busca na RAWG
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/games/popular:
+    get:
+      tags:
+        - RAWG API
+      summary: Jogos populares (RAWG)
+      description: Retorna top 10 jogos populares da API RAWG
+      operationId: getPopularGames
+      responses:
+        '200':
+          description: Lista de jogos populares
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    background_image:
+                      type: string
+                    rating:
+                      type: number
+                    released:
+                      type: string
+        '502':
+          description: Erro ao consultar API RAWG
+
+  /api/rawg-news:
+    get:
+      tags:
+        - RAWG API
+      summary: Notícias de jogos (RAWG)
+      description: Retorna notícias agregadas de jogos via RAWG
+      operationId: getRawgNews
+      parameters:
+        - name: search
+          in: query
+          description: Termo de busca
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          description: Número de notícias
+          schema:
+            type: integer
+            default: 5
+      responses:
+        '200':
+          description: Lista de notícias
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  results:
+                    type: array
+                    items:
+                      type: object
+
+  /api/auth/register:
+    post:
+      tags:
+        - Autenticação
+      summary: Registrar novo usuário
+      description: Cria uma nova conta de usuário e retorna token JWT
+      operationId: register
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+              properties:
+                username:
+                  type: string
+                  minLength: 3
+                  example: "joao_gamer"
+                email:
+                  type: string
+                  format: email
+                  example: "joao@example.com"
+                password:
+                  type: string
+                  minLength: 6
+                  example: "senha123"
+                nome_completo:
+                  type: string
+                  example: "João Paulo"
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Usuário cadastrado com sucesso!"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          description: Campos obrigatórios faltando ou inválidos
+        '409':
+          description: Username ou email já cadastrado
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/auth/login:
+    post:
+      tags:
+        - Autenticação
+      summary: Login de usuário
+      description: Autentica usuário e retorna token JWT
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "admin@gamestore.com"
+                username:
+                  type: string
+                  example: "admin"
+                password:
+                  type: string
+                  example: "123456"
+      responses:
+        '200':
+          description: Login bem-sucedido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Login realizado com sucesso!"
+                  token:
+                    type: string
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          description: Campos obrigatórios faltando
+        '401':
+          description: Credenciais inválidas
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/auth/verify:
+    get:
+      tags:
+        - Autenticação
+      summary: Verificar token JWT
+      description: Valida se o token JWT é válido e retorna dados do usuário
+      operationId: verifyToken
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Token válido
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Usuário não encontrado
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/auth/refresh:
+    post:
+      tags:
+        - Autenticação
+      summary: Renovar token JWT
+      description: Gera um novo token JWT para o usuário autenticado
+      operationId: refreshToken
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Token renovado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
+                  token:
+                    type: string
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Usuário não encontrado
+
+  /api/checkout:
+    post:
+      tags:
+        - Compras
+      summary: Processar compra
+      description: Finaliza compra de jogo(s) e registra no banco
+      operationId: checkout
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - formaPagamento
+              properties:
+                gameId:
+                  type: integer
+                  description: ID de um único jogo (legado)
+                  example: 1
+                cart:
+                  type: array
+                  description: Carrinho com múltiplos itens
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      qty:
+                        type: integer
+                  example:
+                    - id: 1
+                      qty: 1
+                    - id: 5
+                      qty: 2
+                nome:
+                  type: string
+                  example: "João Paulo"
+                email:
+                  type: string
+                  example: "joao@example.com"
+                cep:
+                  type: string
+                  example: "12345-678"
+                formaPagamento:
+                  type: string
+                  enum: [credito, debito, pix, boleto]
+                  example: "pix"
+                cupom:
+                  type: string
+                  example: "DESC10"
+      responses:
+        '200':
+          description: Compra realizada com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  sucesso:
+                    type: boolean
+                    example: true
+                  mensagem:
+                    type: string
+                    example: "Compra realizada com sucesso!"
+                  protocolo:
+                    type: string
+                    example: "#CHK123456"
+                  orderId:
+                    type: integer
+                    example: 42
+        '400':
+          description: Forma de pagamento obrigatória ou carrinho vazio
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Jogo não encontrado
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /api/account/{id}:
+    get:
+      tags:
+        - Usuário
+      summary: Dados da conta do usuário
+      description: Retorna dados do usuário e histórico de compras
+      operationId: getAccount
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID do usuário
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Dados da conta
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+                  purchases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Purchase'
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Acesso negado - usuário só pode ver sua própria conta
+        '404':
+          description: Usuário não encontrado
+
+  /api/user/me:
+    get:
+      tags:
+        - Usuário
+      summary: Dados básicos do usuário autenticado
+      description: Retorna nome, email e data de criação do usuário logado
+      operationId: getUserMe
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dados do usuário
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nome:
+                    type: string
+                  email:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '404':
+          description: Usuário não encontrado
+
+  /api/orders/user/{id}:
+    get:
+      tags:
+        - Compras
+      summary: Histórico de compras do usuário
+      description: Retorna todas as compras do usuário com detalhes dos jogos
+      operationId: getUserOrders
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ID do usuário
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Histórico de compras
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  orders:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Order'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+        '403':
+          description: Acesso negado - usuário só pode ver suas próprias compras
+
+  /api/compras/historico:
+    get:
+      tags:
+        - Compras
+      summary: Histórico de compras (legado)
+      description: Retorna histórico de compras da tabela legado 'compras'
+      operationId: getComprasHistorico
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Histórico de compras
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  purchases:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Purchase'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/UnauthorizedError'
+
+  /api/support/ticket:
+    post:
+      tags:
+        - Suporte
+      summary: Criar ticket de suporte
+      description: Cria um ticket de suporte e retorna protocolo
+      operationId: createSupportTicket
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - message
+              properties:
+                name:
+                  type: string
+                  example: "João Paulo"
+                email:
+                  type: string
+                  format: email
+                  example: "joao@example.com"
+                subject:
+                  type: string
+                  example: "Problema com pagamento"
+                message:
+                  type: string
+                  example: "Não consegui finalizar a compra com PIX"
+      responses:
+        '200':
+          description: Ticket criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "ok"
+                  protocolo:
+                    type: string
+                    example: "#294919"
+                  mensagem:
+                    type: string
+                    example: "Seu ticket foi aberto com sucesso."
+        '400':
+          description: Campos obrigatórios faltando
+
+  /__routes:
+    get:
+      tags:
+        - Debug
+      summary: Listar rotas registradas
+      description: Debug endpoint para listar todas as rotas da API
+      operationId: listRoutes
+      responses:
+        '200':
+          description: Lista de rotas
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  routes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        path:
+                          type: string
+                        methods:
+                          type: string
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Token JWT obtido via login ou registro.
+        
+        Exemplo de uso:
+        ```
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        ```
+
+  schemas:
+    Jogo:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: "GTA V"
+        price:
+          type: number
+          format: float
+          example: 89.90
+        platforms:
+          type: array
+          items:
+            type: string
+          example: ["pc", "ps", "xbox"]
+        image:
+          type: string
+          format: uri
+          example: "https://example.com/gta5.jpg"
+        plays:
+          type: integer
+          example: 1200000
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: "admin"
+        email:
+          type: string
+          format: email
+          example: "admin@gamestore.com"
+        nome_completo:
+          type: string
+          nullable: true
+          example: "Administrador"
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-11-30T12:00:00Z"
+
+    Order:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          example: 42
+        totalPrice:
+          type: number
+          format: float
+          example: 149.80
+        createdAt:
+          type: string
+          format: date-time
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              game_id:
+                type: integer
+              title:
+                type: string
+              image:
+                type: string
+              price:
+                type: number
+              quantity:
+                type: integer
+
+    Purchase:
+      type: object
+      properties:
+        id:
+          type: integer
+        produto:
+          type: string
+        valor:
+          type: number
+        data_compra:
+          type: string
+          format: date-time
+        image:
+          type: string
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: string
+
+  responses:
+    UnauthorizedError:
+      description: Token JWT inválido, expirado ou não fornecido
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Acesso negado"
+              message:
+                type: string
+                example: "Token de autenticação não fornecido"
+
+    InternalServerError:
+      description: Erro interno do servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: "Erro ao processar requisição"
+            message: "Erro interno do servidor"
+            details: "Connection to database failed"

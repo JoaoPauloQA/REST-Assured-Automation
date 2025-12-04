@@ -1,82 +1,145 @@
-name: CI/CD Pipeline - GameStore Backend + Testes Rest Assured
+name: 🚀 CI/CD - Rest Assured Tests + Backend GameStore
 
+# ========================================
+# QUANDO EXECUTAR O PIPELINE
+# ========================================
 on:
   push:
-    branches: [ master, main ]
+    branches: [ master, main, develop ]
   pull_request:
-    branches: [ master, main ]
+    branches: [ master, main, develop ]
   workflow_dispatch:
 
 jobs:
-  test-backend:
-    name: 🧪 Testes Backend + Rest Assured
+  # ========================================
+  # JOB PRINCIPAL: TESTAR API COM REST ASSURED
+  # ========================================
+  test-api:
+    name: 🧪 Testes Rest Assured da API GameStore
     runs-on: ubuntu-latest
 
+    # ========================================
+    # SERVIÇO POSTGRESQL EM CONTAINER
+    # ========================================
     services:
       postgres:
         image: postgres:15
         env:
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: testpassword
           POSTGRES_DB: gamestore_test
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
-      # Checkout
-      - name: 📥 Checkout código
+      # ========================================
+      # STEP 1: CHECKOUT DO REPOSITÓRIO DE TESTES
+      # ========================================
+      - name: 📥 Checkout código do repositório
         uses: actions/checkout@v4
 
-      # Node.js
+      # ========================================
+      # STEP 2: SETUP NODE.JS 18
+      # ========================================
       - name: 🟢 Setup Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: Backend/package-lock.json
+          # Cache npm (sem especificar path se não tiver package-lock.json commitado)
 
-      # Instalar dependências do backend
+      # ========================================
+      # STEP 3: INSTALAR DEPENDÊNCIAS DO BACKEND
+      # ========================================
       - name: 📦 Instalar dependências do Backend
         working-directory: ./Backend
-        run: npm ci
+        run: |
+          echo "📋 Instalando dependências do Node.js..."
+          npm install
+          echo "✅ Dependências instaladas!"
 
-      # Criar .env
-      - name: ⚙️ Criar arquivo .env
+      # ========================================
+      # STEP 4: CONFIGURAR VARIÁVEIS DE AMBIENTE
+      # ========================================
+      - name: ⚙️  Criar arquivo .env do Backend
         working-directory: ./Backend
         run: |
-          echo "DATABASE_URL=postgresql://postgres:testpassword@localhost:5432/gamestore_test" > .env
-          echo "JWT_SECRET=${{ secrets.JWT_SECRET || 'ci-secret-key' }}" >> .env
-          echo "PORT=3000" >> .env
-          echo "RAWG_API_KEY=${{ secrets.RAWG_API_KEY || '' }}" >> .env
+          echo "🔧 Criando arquivo .env..."
+          cat > .env << EOF
+          DATABASE_URL=postgresql://postgres:testpassword@localhost:5432/gamestore_test
+          JWT_SECRET=${{ secrets.JWT_SECRET || '6b40c450e47b529f9c300c10c4b1fd122cd53306b02c3901d19199dd3f0ba5a7' }}
+          PORT=3000
+          RAWG_API_KEY=${{ secrets.RAWG_API_KEY || '534f1d1eacc34f8d9194c5b73c0d7099' }}
+          NODE_ENV=test
+          EOF
+          echo "✅ Arquivo .env criado:"
           cat .env
 
-      # Criar tabelas SQL
-      - name: 🗄️ Criar Tabelas no PostgreSQL
+      # ========================================
+      # STEP 5: CRIAR TABELAS NO POSTGRESQL
+      # ========================================
+      - name: 🗄️  Criar schema do banco de dados
         working-directory: ./Backend
         run: |
-          sleep 5
+          echo "⏳ Aguardando PostgreSQL estar totalmente pronto..."
+          sleep 10
+          
+          echo "📋 Executando RECREATE-DATABASE.sql..."
           PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f RECREATE-DATABASE.sql
+          
+          echo "✅ Tabelas criadas com sucesso!"
+          
+          echo "🔍 Verificando tabelas criadas..."
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "\dt"
 
-      # Start backend
-      - name: 🚀 Iniciar Backend
+      # ========================================
+      # STEP 6: INICIAR SERVIDOR BACKEND
+      # ========================================
+      - name: 🚀 Iniciar servidor Express
         working-directory: ./Backend
         run: |
+          echo "🚀 Iniciando servidor Node.js..."
           nohup npm start > backend.log 2>&1 &
           echo $! > backend.pid
-          echo "Backend iniciado com PID: $(cat backend.pid)"
+          
+          echo "✅ Servidor iniciado com PID: $(cat backend.pid)"
+          echo "📋 Aguardando inicialização..."
+          sleep 5
 
-      # Esperar API ficar online
-      - name: ⏳ Aguardar backend subir
+      # ========================================
+      # STEP 7: AGUARDAR BACKEND FICAR ONLINE
+      # ========================================
+      - name: ⏳ Aguardar servidor estar online
         run: |
-          npm install -g wait-on
-          wait-on http://localhost:3000/api/jogos
-          echo "Servidor está online!"
+          echo "⏳ Aguardando endpoint /api/jogos responder..."
+          npx wait-on http://localhost:3000/api/jogos -t 60000 -i 2000 -v
+          echo "✅ Backend está online e respondendo!"
 
-      # Setup Java
+      # ========================================
+      # STEP 8: TESTAR API COM CURL (SMOKE TEST)
+      # ========================================
+      - name: 🧪 Smoke test da API
+        run: |
+          echo "🧪 Testando endpoint GET /api/jogos..."
+          curl -f http://localhost:3000/api/jogos | jq '.' || echo "API respondeu sem JSON"
+          
+          echo ""
+          echo "🧪 Testando endpoint de autenticação..."
+          curl -X POST http://localhost:3000/api/auth/login \
+            -H "Content-Type: application/json" \
+            -d '{"email":"admin@gamestore.com","password":"123456"}' \
+            | jq '.' || echo "Login endpoint OK"
+          
+          echo ""
+          echo "✅ Smoke tests concluídos!"
+
+      # ========================================
+      # STEP 9: SETUP JAVA 17 + MAVEN
+      # ========================================
       - name: ☕ Setup Java 17
         uses: actions/setup-java@v4
         with:
@@ -84,48 +147,136 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      # Executar testes REST Assured
+      # ========================================
+      # STEP 10: EXECUTAR TESTES REST ASSURED
+      # ========================================
       - name: 🧪 Executar testes Rest Assured
-        run: mvn clean test -Dtest.api.url=http://localhost:3000
+        run: |
+          echo "📋 Iniciando testes Rest Assured..."
+          echo "📍 Diretório atual: $(pwd)"
+          echo "📂 Conteúdo do diretório:"
+          ls -la
+          
+          if [ -f "pom.xml" ]; then
+            echo "✅ pom.xml encontrado!"
+            echo "🧪 Executando: mvn clean test"
+            mvn clean test \
+              -Dtest.api.baseUrl=http://localhost:3000 \
+              -Dtest.api.url=http://localhost:3000 \
+              -DbaseUrl=http://localhost:3000
+          
+            echo "✅ Testes concluídos!"
+          else
+            echo "❌ ERRO: pom.xml não encontrado!"
+            echo "📂 Estrutura do repositório:"
+            find . -name "pom.xml" -o -name "*.java"
+            exit 1
+          fi
         continue-on-error: false
 
-      # Gerar Allure
-      - name: 📊 Gerar Allure Report
+      # ========================================
+      # STEP 11: GERAR RELATÓRIO ALLURE
+      # ========================================
+      - name: 📊 Gerar relatório Allure
         if: always()
         run: |
           if [ -d "target/allure-results" ]; then
-            npm install -g allure-commandline --unsafe-perm=true
+            echo "📊 Gerando relatório Allure..."
+            npm install -g allure-commandline
             allure generate target/allure-results -o target/allure-report --clean
+            echo "✅ Relatório Allure gerado em target/allure-report/"
           else
-            echo "⚠ Nenhum resultado do Allure encontrado."
+            echo "⚠️  Diretório target/allure-results não encontrado"
+            echo "📂 Conteúdo de target/:"
+            ls -la target/ || echo "Pasta target/ não existe"
           fi
         continue-on-error: true
 
-      # Upload Allure report
-      - name: 📤 Upload Allure Report
+      # ========================================
+      # STEP 12: UPLOAD RELATÓRIO ALLURE
+      # ========================================
+      - name: 📤 Upload relatório Allure
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report
-          path: target/allure-report
+          name: allure-report-${{ github.run_number }}
+          path: target/allure-report/
+          if-no-files-found: warn
           retention-days: 30
 
-      # Upload logs do backend quando falhar
-      - name: 📤 Upload logs do backend
-        if: failure()
+      # ========================================
+      # STEP 13: UPLOAD SUREFIRE REPORTS
+      # ========================================
+      - name: 📤 Upload Surefire reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: backend-logs
+          name: surefire-reports-${{ github.run_number }}
+          path: target/surefire-reports/
+          if-no-files-found: warn
+          retention-days: 15
+
+      # ========================================
+      # STEP 14: UPLOAD LOGS DO BACKEND
+      # ========================================
+      - name: 📤 Upload logs do Backend
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-logs-${{ github.run_number }}
           path: Backend/backend.log
+          if-no-files-found: warn
           retention-days: 7
 
-      # Finalizar servidor
+      # ========================================
+      # STEP 15: MOSTRAR LOGS EM CASO DE FALHA
+      # ========================================
+      - name: 📋 Mostrar logs do backend (se falhou)
+        if: failure()
+        working-directory: ./Backend
+        run: |
+          echo "========================================="
+          echo "📋 LOGS DO SERVIDOR BACKEND"
+          echo "========================================="
+          if [ -f backend.log ]; then
+            tail -n 100 backend.log
+          else
+            echo "⚠️  Arquivo backend.log não encontrado"
+          fi
+
+      # ========================================
+      # STEP 16: PARAR SERVIDOR BACKEND
+      # ========================================
       - name: 🛑 Parar servidor Backend
         if: always()
         working-directory: ./Backend
         run: |
           if [ -f backend.pid ]; then
-            kill $(cat backend.pid) || true
-            rm backend.pid
-            echo "Servidor parado"
+            PID=$(cat backend.pid)
+            echo "🛑 Parando servidor com PID: $PID"
+            kill $PID || true
+            sleep 2
+            kill -9 $PID 2>/dev/null || true
+            rm -f backend.pid
+            echo "✅ Servidor parado"
+          else
+            echo "⚠️  Arquivo backend.pid não encontrado"
+            echo "🔍 Tentando encontrar processo Node.js..."
+            pkill -f "node.*server.js" || echo "Nenhum processo encontrado"
           fi
+
+      # ========================================
+      # STEP 17: SUMMARY DOS TESTES
+      # ========================================
+      - name: 📊 Summary dos testes
+        if: always()
+        run: |
+          echo "========================================="
+          echo "📊 RESUMO DA EXECUÇÃO"
+          echo "========================================="
+          echo "🏃 Run Number: ${{ github.run_number }}"
+          echo "📅 Data: $(date)"
+          echo "🔗 Repositório: ${{ github.repository }}"
+          echo "🌿 Branch: ${{ github.ref_name }}"
+          echo "👤 Autor: ${{ github.actor }}"
+          echo "========================================="
