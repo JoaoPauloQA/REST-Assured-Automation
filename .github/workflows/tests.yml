@@ -112,7 +112,7 @@ jobs:
         working-directory: .
         run: |
           echo "🌱 Executando seed.sql no PostgreSQL..."
-          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f Backend/src/test/resources/seed.sql
+          PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -f ./src/test/resources/seed.sql
 
           echo "📋 Usuários criados:"
           PGPASSWORD=testpassword psql -h localhost -U postgres -d gamestore_test -c "SELECT id, username, email FROM usuarios;"
