@@ -25,7 +25,7 @@ public class LoginTest extends BaseTests {
     @Story("Login bem-sucedido")
     public void deveLogarComSucesso(){
 
-        Response response = auth.fazerLogin("qa_user@gamestore.com", "123456");
+        Response response = auth.fazerLogin("qa_user@gamestore.com", "123456789");
         validator.validarStatusCode(response,200);
         token = auth.extrairToken(response);
 
