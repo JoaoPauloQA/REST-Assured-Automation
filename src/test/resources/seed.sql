@@ -8,8 +8,7 @@ VALUES
     1,
     'qa_user',
     'qa_user@gamestore.com',
-    -- senha: 123456789 (use o mesmo hash que seu backend gera)
-    '$2a$10$P2f....EXEMPLO_DE_HASH',
+   '$2b$10$3vBt6CTidoUuM0IsRwVBF.SfgH2dnK8Yhs6pgbIgQ/rBn/XwL5KV6',
     'QA User',
     NOW(),
     NOW()
@@ -22,7 +21,7 @@ VALUES
     2,
     'usuario_existente',
     'duplicado@gamestore.com',
-    '$2a$10$P2f....EXEMPLO_DE_HASH',
+    '$2b$10$3vBt6CTidoUuM0IsRwVBF.SfgH2dnK8Yhs6pgbIgQ/rBn/XwL5KV6',
     'Usuário Duplicado',
     NOW(),
     NOW()
