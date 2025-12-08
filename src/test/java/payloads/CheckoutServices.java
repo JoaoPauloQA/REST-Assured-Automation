@@ -9,12 +9,14 @@ public class CheckoutServices  extends BaseTests {
     public Response realizarCheckout(String token,String body) {
 
      return given()
-             .header("Authorization", "Bearer" + token)
+             .header("Authorization", "Bearer " + token)
              .contentType("application/json")
              .body(body)
+             .log().all()
              .when()
              .post(CHECKOUT_ENDPOINT)
              .then()
+             .log().all()
              .extract()
              .response();
 

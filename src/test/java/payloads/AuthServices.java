@@ -12,6 +12,7 @@ public class AuthServices extends BaseTests {
                 given()
                         .contentType("application/json")
                         .body(AuthPayloads.login(email, password))
+                        .log().all()
                         .when()
                         .post(LOGIN_ENDPOINT);
     }

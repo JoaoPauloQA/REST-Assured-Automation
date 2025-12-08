@@ -11,6 +11,7 @@ public class BaseTests {
     protected static final String LOGIN_ENDPOINT = "/auth/login";
 
     protected static final String GAMES_ENDPOINT = "/games";
+    protected static final String GAMESPOPULAR_ENDPOINT = "/games/popular";
     protected static final String CHECKOUT_ENDPOINT = "/checkout";
     protected static final String PURCHASES_ENDPOINT = "/purchases";
 

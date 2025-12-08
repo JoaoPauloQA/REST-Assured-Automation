@@ -1,10 +1,13 @@
 package checkout;
 import config.BaseTests;
+import org.junit.jupiter.api.BeforeEach;
 import payloads.AuthServices;
 import payloads.CheckoutServices;
 import validators.ResponseValidator;
 import io.restassured.response.Response;
+import Factories.Userfactory;
 import org.junit.jupiter.api.Test;
+import payloads.CarrinhoPayload;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
@@ -18,21 +21,91 @@ public class CheckoutTests  extends BaseTests {
     ResponseValidator validator = new ResponseValidator();
     CheckoutServices checkout = new CheckoutServices();
 
+    @BeforeEach
+    public void LoginAPI () {
+        Response response = auth.fazerLogin("qa_user@gamestore.com", "123456789");
+        token = auth.extrairToken(response);
+
+    }
+
+
+
     @Test
     @Story("Checkout bem sucedido")
     public void DeveComprarComsucesso() {
 
          // Login API
-        Response response = auth.fazerLogin("qa_user@gamestore.com", "123456");
-        token = auth.extrairToken(response);
 
 
+        String body = CarrinhoPayload.criarCheckout(1,1,"pix");
 
+        Response checkoutresponse =  checkout.realizarCheckout(token, body);
 
+        validator.validarStatusCode(checkoutresponse, 200);
+
+    }
+
+    @Test
+    @Story("Checkout sem body")
+    public void DeveExibirMensagemDeErroAoRealizarCheckoutSemBody() {
+
+        String body = "";
+
+        Response checkoutresponse = checkout.realizarCheckout(token, body);
+
+        validator.validarStatusCode(checkoutresponse,400);
 
 
 
     }
 
+    @Test
+    @Story("Checkout com id inexistente")
+    public void DeveExibirMensagemDeErroaoRealizarCheckoutComIDInexistente() {
 
+        String body = CarrinhoPayload.criarCheckout(25,1,"pix");
+
+        Response checkoutresponse = checkout.realizarCheckout(token, body);
+
+        validator.validarStatusCode(checkoutresponse,400);
+    }
+
+    @Test
+    @Story("Checkout com token inválido")
+    public void DeveExibirMensagemDeErroAoRealizarCheckoutcomTokenInválido() {
+
+        String tokeninvalido = "abc234";
+
+        String body = CarrinhoPayload.criarCheckout(2,2,"pix");
+
+        Response checkoutresponse = checkout.realizarCheckout(tokeninvalido, body);
+
+        validator.validarStatusCode(checkoutresponse, 401);
+
+    }
+
+    @Test
+    @Story("Checkout sem token")
+    public void DeveExibirMensagemDeErroAoRealizarCheckoutSemToken(){
+
+        String tokenAusente = "";
+
+        String body = CarrinhoPayload.criarCheckout(3,1,"pix");
+
+        Response checkoutresponse = checkout.realizarCheckout(tokenAusente, body);
+
+        validator.validarStatusCode(checkoutresponse,401);
+    }
+   @Test
+    @Story("Checkout com token expirado")
+     public void DeveExibirMensagemDeErroAoRealizarCheckoutComTokenExpirado() {
+
+        String token_expirado = Userfactory.TokenExpirado();
+
+        String body = CarrinhoPayload.criarCheckout(4,1,"pix");
+
+        Response checkoutresponse = checkout.realizarCheckout(token_expirado, body);
+
+        validator.validarStatusCode(checkoutresponse, 401);
+   }
 }
