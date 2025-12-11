@@ -18,7 +18,7 @@ Pré-requisitos
 -Git
 
 ## 🔧 Endpoints Testados
-- 🕹️ Games
+## 🕹️ Games
 - Método	Rota
 - GET	/api/jogos
 - GET	/api/games
@@ -30,18 +30,31 @@ Pré-requisitos
 - GET	/api/rawg-games
 - GET	/api/games/popular
 - GET	/api/games/:id/details
-- 👤 Autenticação
+## 👤 Autenticação
 - Método	Rota
 - POST	/api/auth/register
 - POST	/api/auth/login
 - POST	/api/auth/refresh
 - GET	/api/auth/verify
 - GET	/api/user/me
-- 🛒 Checkout & Account
+## 🛒 Checkout & Account
 - Método	Rota
 - POST	/api/checkout
 - GET	/api/account/:id
 - GET	/api/orders/user/:id
+
+## 🔍 Validações e Testes de Contrato (Schema Validation)
+
+Além de testes funcionais, o projeto também implementa testes de contrato para garantir que as respostas da API sigam exatamente o formato esperado.
+
+Os testes de contrato incluem:
+
+- ✔ Validação de schema (JSON Schema Validation)
+- ✔ Tipos de dados corretos (string, boolean, array, number, object)
+- ✔ Campos obrigatórios presentes
+- ✔ Estrutura da resposta consistente
+- ✔ Garantia de que alterações indevidas no back-end sejam detectadas
+- ✔ Prevenção de breaking changes
 
 ## 🔄CI/CD com Allure (GitHub Actions)
 
