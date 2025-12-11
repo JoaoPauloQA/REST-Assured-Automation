@@ -17,31 +17,52 @@ Pré-requisitos
 -Maven instalado
 -Git 
 
-## 🧩 Dependências para Executar os Testes Localmente
+# 🧩 Dependências para Executar os Testes Localmente
 
-Este projeto testa a aplicação real da plataforma GameStore, que roda localmente.
-Por isso, para executar os testes na sua máquina, você precisa clonar dois repositórios:
+**Importante**: Este projeto de automação testa a aplicação GameStore real em execução local. Você precisa clonar dois repositórios e iniciar o servidor do GameStore antes de rodar os testes.
 
-1️⃣ Clonar e rodar o projeto REAL (GameStore – Front + Back + PostgreSQL)
+**Requisitos locais**
+- Java 17 (para o projeto de testes)
+- Maven (para o projeto de testes)
+- Node.js 18+ (para o back-end/front-end do GameStore)
+- Git
+- Docker & Docker Compose (opcional, recomendado para Postgres)
+
+## 1️⃣ Clonar e rodar o projeto REAL (GameStore – Front + Back + PostgreSQL)
 
 Este é o sistema completo que será testado.
 
+```
 git clone https://github.com/JoaoPauloQA/ProjetoGameStore
 cd gamestore
 
+Instalar dependências e iniciar (modo local)
+
+- npm install
+
+O banco PostgreSQL já está hospedado no Railway, então não precisa instalar Postgres localmente.
+
 Inicie o servidor :
 
-node server.js
+- node server.js
 
 A aplicação deve estar disponível em:
 
 http://localhost:8080
 
+Banco de dados (PostgreSQL)
+
+```
+
 ## 2️⃣ Clonar este projeto de automação (API Tests – Rest Assured)
 
 Com o servidor rodando, agora sim clone o projeto de testes:
 
+```
+
 git clone https://github.com/JoaoPauloQA/REST-Assured-Automation
+
+```
 
 📌 Observações Importantes
 
