@@ -4,12 +4,12 @@ Suite de testes automatizados das APIs da plataforma GameStore, utilizando Rest 
 
 ## 🧩 Tecnologias & Bibliotecas
 
--Java 17
--Maven
--Rest Assured
--JUnit 5
--Allure Reports
--GitHub Actions (CI/CD)
+- Java 17
+- Maven
+- Rest Assured
+- JUnit 5
+- Allure Reports
+- GitHub Actions (CI/CD)
 
 ## 📦 Instalação
 Pré-requisitos
@@ -18,7 +18,7 @@ Pré-requisitos
 -Git
 
 ## 🔧 Endpoints Testados
-🕹️ Games
+- 🕹️ Games
 Método	Rota
 GET	/api/jogos
 GET	/api/games
@@ -30,14 +30,14 @@ GET	/api/top-played
 GET	/api/rawg-games
 GET	/api/games/popular
 GET	/api/games/:id/details
-👤 Autenticação
+- 👤 Autenticação
 Método	Rota
 POST	/api/auth/register
 POST	/api/auth/login
 POST	/api/auth/refresh
 GET	/api/auth/verify
 GET	/api/user/me
-🛒 Checkout & Account
+- 🛒 Checkout & Account
 Método	Rota
 POST	/api/checkout
 GET	/api/account/:id
@@ -47,7 +47,7 @@ GET	/api/orders/user/:id
 
 Pipeline configurado para:
 
-✔ Rodar testes automaticamente a cada push
-✔ Gerar artefatos
-✔ Validar o build Maven
+- ✔ Rodar testes automaticamente a cada push
+- ✔ Gerar artefatos
+- ✔ Validar o build Maven
 
