@@ -15,11 +15,44 @@ Suite de testes automatizados das APIs da plataforma GameStore, utilizando Rest 
 Pré-requisitos
 -Java 17 instalado
 -Maven instalado
--Git
+-Git 
+
+## 🧩 Dependências para Executar os Testes Localmente
+
+Este projeto testa a aplicação real da plataforma GameStore, que roda localmente.
+Por isso, para executar os testes na sua máquina, você precisa clonar dois repositórios:
+
+1️⃣ Clonar e rodar o projeto REAL (GameStore – Front + Back + PostgreSQL)
+
+Este é o sistema completo que será testado.
+
+git clone https://github.com/JoaoPauloQA/ProjetoGameStore
+cd gamestore
+
+Inicie o servidor :
+
+node server.js
+
+A aplicação deve estar disponível em:
+
+http://localhost:8080
+
+## 2️⃣ Clonar este projeto de automação (API Tests – Rest Assured)
+
+Com o servidor rodando, agora sim clone o projeto de testes:
+
+git clone https://github.com/JoaoPauloQA/REST-Assured-Automation
+
+📌 Observações Importantes
+
+- ✔ Os testes fazem chamadas reais para sua API real
+- ✔ O banco de dados e o back-end precisam estar funcionando
+- ✔ O CI/CD pode usar uma URL pública (se você tiver deploy)
+- ✔ Localmente é obrigatório rodar o projeto GameStore primeiro
 
 ## 🔧 Endpoints Testados
 ## 🕹️ Games
-- Método	Rota
+
 - GET	/api/jogos
 - GET	/api/games
 - GET	/api/jogos/recomendado
@@ -31,14 +64,14 @@ Pré-requisitos
 - GET	/api/games/popular
 - GET	/api/games/:id/details
 ## 👤 Autenticação
-- Método	Rota
+
 - POST	/api/auth/register
 - POST	/api/auth/login
 - POST	/api/auth/refresh
 - GET	/api/auth/verify
 - GET	/api/user/me
 ## 🛒 Checkout & Account
-- Método	Rota
+
 - POST	/api/checkout
 - GET	/api/account/:id
 - GET	/api/orders/user/:id
