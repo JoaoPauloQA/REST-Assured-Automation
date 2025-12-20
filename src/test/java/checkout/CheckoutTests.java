@@ -5,6 +5,7 @@ import payloads.AuthServices;
 import payloads.CheckoutServices;
 import validators.ResponseValidator;
 import io.restassured.response.Response;
+import Contracts.CheckoutContract;
 import Factories.Userfactory;
 import org.junit.jupiter.api.Test;
 import payloads.CarrinhoPayload;
@@ -20,6 +21,7 @@ public class CheckoutTests  extends BaseTests {
     AuthServices auth = new AuthServices();
     ResponseValidator validator = new ResponseValidator();
     CheckoutServices checkout = new CheckoutServices();
+    CheckoutContract contract = new CheckoutContract();
 
     @BeforeEach
     public void LoginAPI () {
@@ -42,6 +44,8 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse =  checkout.realizarCheckout(token, body);
 
         validator.validarStatusCode(checkoutresponse, 200);
+        contract.CheckoutContractPositivo(checkoutresponse);
+
 
     }
 
@@ -54,6 +58,7 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse = checkout.realizarCheckout(token, body);
 
         validator.validarStatusCode(checkoutresponse,400);
+        contract.validarContratoErroCheckoutComMensagemEmPortugues(checkoutresponse);
 
 
 
@@ -68,6 +73,7 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse = checkout.realizarCheckout(token, body);
 
         validator.validarStatusCode(checkoutresponse,400);
+        contract.validarContratoErroCheckoutComMensagemEmPortugues(checkoutresponse);
     }
 
     @Test
@@ -81,6 +87,7 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse = checkout.realizarCheckout(tokeninvalido, body);
 
         validator.validarStatusCode(checkoutresponse, 401);
+        contract.validarContratoErroCheckoutComMensagemEmIngles(checkoutresponse);
 
     }
 
@@ -95,6 +102,7 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse = checkout.realizarCheckout(tokenAusente, body);
 
         validator.validarStatusCode(checkoutresponse,401);
+        contract.validarContratoErroCheckoutComMensagemEmIngles(checkoutresponse);
     }
    @Test
     @Story("Checkout com token expirado")
@@ -107,5 +115,6 @@ public class CheckoutTests  extends BaseTests {
         Response checkoutresponse = checkout.realizarCheckout(token_expirado, body);
 
         validator.validarStatusCode(checkoutresponse, 401);
+       contract.validarContratoErroCheckoutComMensagemEmIngles(checkoutresponse);
    }
 }

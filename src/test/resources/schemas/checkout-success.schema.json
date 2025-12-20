@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["sucesso","mensagem","protocolo","orderId"],
+  "properties": {
+    "sucesso": {"type": "boolean"},
+    "mensagem": {"type": "string"},
+    "protocolo": {"type": "string"},
+    "orderId": {"type": "integer"}
+  }
+}
