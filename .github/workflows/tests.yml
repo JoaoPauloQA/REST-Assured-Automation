@@ -240,6 +240,7 @@ jobs:
             echo "✅ pom.xml encontrado!"
             echo "🧪 Executando: mvn clean test"
             mvn clean test \
+               -DincludeTags=smoke \
               -Dtest.api.baseUrl=http://localhost:3000 \
               -Dtest.api.url=http://localhost:3000 \
               -DbaseUrl=http://localhost:3000

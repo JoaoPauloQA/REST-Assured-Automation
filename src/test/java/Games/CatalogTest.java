@@ -1,18 +1,19 @@
 package Games;
 
 import config.BaseTests;
+import org.junit.jupiter.api.Tag;
 import payloads.GamesServices;
 import io.restassured.response.Response;
 import validators.ResponseValidator;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.Test;
 
-public class GamesTest extends BaseTests {
+public class CatalogTest extends BaseTests {
 
     ResponseValidator validator = new ResponseValidator();
     GamesServices games = new GamesServices();
 
-
+    @Tag("smoke")
     @Test
     @Story("Buscar Jogos")
     public void DeveExibirJogosListados() {
@@ -24,7 +25,7 @@ public class GamesTest extends BaseTests {
 
 
     }
-
+    @Tag("smoke")
     @Test
     @Story("Buscar jogos populares")
     public void DeveExibirJogosPopulares() {
@@ -33,7 +34,7 @@ public class GamesTest extends BaseTests {
 
         validator.validarStatusCode(response, 200);
     }
-
+    @Tag("smoke")
     @Test
     @Story("BuscarDetalhesJogos")
     public void DeveExibirDetalhesdoJogo() {

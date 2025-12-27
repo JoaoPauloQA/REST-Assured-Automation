@@ -1,6 +1,7 @@
 package checkout;
 import config.BaseTests;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import payloads.AuthServices;
 import payloads.CheckoutServices;
 import validators.ResponseValidator;
@@ -31,7 +32,7 @@ public class CheckoutTests  extends BaseTests {
     }
 
 
-
+    @Tag("smoke")
     @Test
     @Story("Checkout bem sucedido")
     public void DeveComprarComsucesso() {

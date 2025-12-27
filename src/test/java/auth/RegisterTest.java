@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Order;
 
@@ -20,6 +21,8 @@ public class RegisterTest extends BaseTests {
     ResponseValidator validator = new ResponseValidator();
     RegisterServices register = new RegisterServices();
 
+
+    @Tag("smoke")
     @Test
     @Story("Registro bem sucedido")
     @Order(1)
@@ -38,7 +41,7 @@ public class RegisterTest extends BaseTests {
  }
 
 
-
+    @Tag("smoke")
   @Test
     @Story("RegistroEmailInvalido")
   @Order(2)
@@ -63,7 +66,7 @@ public class RegisterTest extends BaseTests {
 
         validator.validarStatusCode(response, 409);
   }
-
+    @Tag("smoke")
 @Test
     @Story("RegistroUsernameDuplicado")
 @Order(4)

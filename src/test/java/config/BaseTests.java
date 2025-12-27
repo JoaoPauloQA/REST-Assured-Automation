@@ -9,6 +9,7 @@ public class BaseTests {
 
     protected static final String REGISTER_ENDPOINT = "/auth/register";
     protected static final String LOGIN_ENDPOINT = "/auth/login";
+    protected static final String VERIFY_ENDPOINT = "/auth/verify";
 
     protected static final String GAMES_ENDPOINT = "/games";
     protected static final String GAMESPOPULAR_ENDPOINT = "/games/popular";

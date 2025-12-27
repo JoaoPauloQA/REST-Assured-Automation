@@ -1,6 +1,8 @@
 package auth;
 import config.BaseTests;
 import static io.restassured.RestAssured.*;
+
+import org.junit.jupiter.api.Tag;
 import payloads.AuthServices;
 import io.restassured.response.Response;
 import validators.ResponseValidator;
@@ -32,7 +34,7 @@ public class LoginTest extends BaseTests {
 
 
     }
-
+    @Tag("smoke")
     @Test
     @Story("Erro de credenciais")
 
@@ -42,7 +44,7 @@ public class LoginTest extends BaseTests {
         validator.validarStatusCode(response,401);
         contract.validarContratoLoginNegativo(response);
     }
-
+    @Tag("smoke")
     @Test
     @Story("EmailSem@")
 
@@ -52,7 +54,7 @@ public class LoginTest extends BaseTests {
         validator.validarStatusCode(response,401);
         contract.validarContratoLoginNegativo(response);
     }
-
+    @Tag("smoke")
     @Test
     @Story("SenhaVazia")
 
@@ -62,7 +64,7 @@ public class LoginTest extends BaseTests {
         validator.validarStatusCode(response,400);
         contract.validarContratoLoginNegativo(response);
     }
-
+    @Tag("smoke")
     @Test
     @Story("EmailVazio")
 
@@ -73,7 +75,7 @@ public class LoginTest extends BaseTests {
         contract.validarContratoLoginNegativo(response);
     }
 
-
+    @Tag("smoke")
     @Test
     @Story("Erro de payload")
     public void deveRetornar400QuandoBodyForVazio(){

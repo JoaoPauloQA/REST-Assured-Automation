@@ -20,4 +20,15 @@ public class AuthServices extends BaseTests {
     public String extrairToken(Response response) {
         return response.jsonPath().getString("token");
     }
+
+    public Response VerificarToken(String token){
+        return
+                given()
+
+                        .header("Authorization", "Bearer " + token)
+                        .log().all()
+                        .when()
+                        .get(VERIFY_ENDPOINT);
+    }
 }
+
