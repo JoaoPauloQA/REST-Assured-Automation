@@ -30,5 +30,15 @@ public class AuthServices extends BaseTests {
                         .when()
                         .get(VERIFY_ENDPOINT);
     }
+
+    public Response RefreshToken(String token){
+        return
+                given()
+
+                        .header("Authorization", "Bearer " + token)
+                        .log().all()
+                        .when()
+                        .post(REFRESH_ENDPOINT);
+    }
 }
 
