@@ -12,6 +12,7 @@
 
 # Allure results
 /allure-results/
+.allure/
 
 ## node
 node_modules/
