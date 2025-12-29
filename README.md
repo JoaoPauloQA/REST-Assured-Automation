@@ -74,12 +74,10 @@ git clone https://github.com/JoaoPauloQA/REST-Assured-Automation
 ## 🔧 Endpoints Testados
 ## 🕹️ Games
 
-- GET	/api/jogos
 - GET	/api/games
 - GET	/api/jogos/recomendado
 - GET	/api/games/count
 - GET	/api/gamepass
-- GET	/api/games/search
 - GET	/api/top-played
 - GET	/api/rawg-games
 - GET	/api/games/popular
@@ -110,14 +108,22 @@ Os testes de contrato incluem:
 - ✔ Garantia de que alterações indevidas no back-end sejam detectadas
 - ✔ Prevenção de breaking changes
 
-## 🔄CI/CD com Allure (GitHub Actions)
+- ![Schema Validation](assets/schema.png)
 
-Pipeline configurado para:
+## 🔍 Allure Reports
 
-- ✔ Rodar testes automaticamente a cada push
-- ✔ Gerar os resultados do Allure
-- ✔ Salvar os artefatos (allure-results) gerados pelo Maven
-- ✔ Disponibilizar os relatórios para download direto no GitHub Actions
+Allure  configurado para:
+
+Allure configurado para:
+
+- ✔ Gerar relatórios de testes automatizados
+- ✔ Armazenar os artefatos de execução (allure-results) gerados via Maven
+- ✔ Facilitar a análise de cenários, status dos testes e evidências
+- ✔ Apoiar a documentação e apresentação dos testes no portfólio
+
+- Exemplo de relatório:
+![Allure Report](assets/allure-reports.png)
+
 
  ## 📁 Estrutura do Projeto
 
@@ -125,24 +131,22 @@ A automação está organizada seguindo boas práticas de testes de API com Rest
 
 ```
 src
-└── test
-    └── java
-        ├── auth
-        │   └── (testes e métodos de autenticação)
-        ├── checkout
-        │   └── (testes do fluxo de checkout)
-        ├── config
-        │   └── (configurações globais, base URI, properties)
-        ├── Factories
-        │   └── (geração de dados dinâmicos e massa de teste)
-        ├── Games
-        │   └── (testes relacionados aos endpoints de jogos)
-        ├── payloads
-        │   └── (corpos de requisição usados no projeto)
-        ├── utils
-        │   └── (helpers, geradores, funções reutilizáveis)
-        └── validators
-            └── (validações e asserts customizados)
+├── test
+│   ├── java
+│   │   ├── auth
+│   │   ├── checkout
+│   │   ├── config
+│   │   ├── factories
+│   │   ├── games
+│   │   ├── payloads
+│   │   ├── utils
+│   │   └── validators
+│   └── resources
+│       └── schemas
+│           ├── login-success.schema.json
+│           ├── login-error.schema.json
+│           ├── refresh-success.schema.json
+│          
 ```
   
 ## 👨‍💻 Autor
