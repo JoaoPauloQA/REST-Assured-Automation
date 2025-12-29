@@ -68,7 +68,6 @@ git clone https://github.com/JoaoPauloQA/REST-Assured-Automation
 
 - ✔ Os testes fazem chamadas reais para sua API real
 - ✔ O banco de dados e o back-end precisam estar funcionando
-- ✔ O CI/CD pode usar uma URL pública (se você tiver deploy)
 - ✔ Localmente é obrigatório rodar o projeto GameStore primeiro
 
 ## 🔧 Endpoints Testados
@@ -94,6 +93,13 @@ git clone https://github.com/JoaoPauloQA/REST-Assured-Automation
 - POST	/api/checkout
 - GET	/api/account/:id
 - GET	/api/orders/user/:id
+- 
+## 🧪 Testes Manuais (Postman)
+
+Os endpoints de autenticação foram testados manualmente no Postman antes da automação,
+garantindo entendimento do fluxo e dos cenários reais de API.
+
+![Postman](assets/POSTMAN.png)
 
 ## 🔍 Validações e Testes de Contrato (Schema Validation)
 
