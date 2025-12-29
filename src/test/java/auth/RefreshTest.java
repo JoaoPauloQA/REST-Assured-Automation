@@ -8,6 +8,13 @@ import validators.ResponseValidator;
 import Factories.RefreshFactory;
 import Factories.Userfactory;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
+@Epic("Refresh")
+@Feature("TokenRenovação")
+
 public class RefreshTest extends BaseTests {
 
     AuthServices auth = new AuthServices();
@@ -15,6 +22,7 @@ public class RefreshTest extends BaseTests {
     RefreshContract contract = new RefreshContract();
 
     @Test
+    @Story("RefreshTokenBemSucedido")
     public void DeveRetornar200ComTokenValido() {
 
         Response response = auth.fazerLogin("qa_user@gamestore.com", "123456789");
@@ -27,6 +35,7 @@ public class RefreshTest extends BaseTests {
     }
 
     @Test
+    @Story("TokenCorrompido")
     public void DeveRetornar401CasoTokenSejaCorrompido(){
 
         String token = RefreshFactory.TokenFaltando1Digito();
@@ -38,6 +47,7 @@ public class RefreshTest extends BaseTests {
     }
 
     @Test
+    @Story("TokenExpirado")
     public void Deveretornar401CasoTokenEstejaExpirado(){
 
         String token = Userfactory.TokenExpirado();
@@ -48,6 +58,7 @@ public class RefreshTest extends BaseTests {
     }
 
     @Test
+    @Story("TokenVazio")
     public void Deveretornar401CasoTokenEstejaVazio(){
 
         String token = "";

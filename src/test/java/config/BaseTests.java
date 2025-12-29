@@ -15,6 +15,7 @@ public class BaseTests {
     protected static final String GAMESPOPULAR_ENDPOINT = "/games/popular";
     protected static final String CHECKOUT_ENDPOINT = "/checkout";
     protected static final String REFRESH_ENDPOINT = "/auth/refresh";
+    protected static final String RAWG_ENDPOINT = "rawg-games";
 
     protected static String token;
 

@@ -43,4 +43,40 @@ public class CatalogTest extends BaseTests {
 
         validator.validarStatusCode(response, 200);
     }
+
+    @Test
+    @Story("ListarJogosdaAPI")
+    public void DeveExibirlistadeJogosdaAPI() {
+
+        Response response = games.listarTodosJogos(RAWG_ENDPOINT);
+
+        validator.validarStatusCode(response, 200);
+    }
+
+    @Test
+    @Story("JogosMaisJogadosDoAno")
+    public void DeveExibirJogosMaisJogadosDoAno() {
+
+        Response response = games.listarTodosJogos("top-played");
+
+        validator.validarStatusCode(response , 200);
+    }
+    @Test
+    @Story("JogoRecomendadoAleatorio")
+    public void DeveExibirJogoRecomendado() {
+
+        Response response = games.listarTodosJogos("jogos/recomendado");
+
+        validator.validarStatusCode(response , 200);
+    }
+
+    @Test
+    @Story("GamePassDisponiveis")
+    public void DeveExibirListaDeGamePass() {
+
+        Response response = games.listarTodosJogos("gamepass");
+
+        validator.validarStatusCode(response , 200);
+    }
 }
+

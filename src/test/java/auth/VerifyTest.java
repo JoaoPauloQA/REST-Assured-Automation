@@ -7,6 +7,13 @@ import payloads.AuthServices;
 import validators.ResponseValidator;
 import Factories.TokenFactory;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
+@Epic("Verify")
+@Feature("VerificarToken")
+
 public class VerifyTest  extends BaseTests {
 
     AuthServices auth = new AuthServices();
@@ -20,6 +27,7 @@ public class VerifyTest  extends BaseTests {
     }
 
     @Test
+    @Story("VerificarTokenAtivo")
     public void VerificarTokenValido() {
 
      Response verifyResponse = auth.VerificarToken(token);
@@ -29,6 +37,7 @@ public class VerifyTest  extends BaseTests {
     }
 
     @Test
+    @Story("VerificarTokenCorrompido")
     public void deveRetornar401ParaTokenComAssinaturaCorrompida(){
 
         String TokenCorrompido = TokenFactory.TokenComAssinaturaInvalida();
@@ -38,6 +47,7 @@ public class VerifyTest  extends BaseTests {
     }
 
     @Test
+    @Story("VerificarTokenAusente")
     public void DeveRetornar401ComTokenAusente() {
 
         String tokenAusente = "";
