@@ -122,7 +122,7 @@ Allure configurado para:
 - ✔ Apoiar a documentação e apresentação dos testes no portfólio
 
 - Exemplo de relatório:
-![Allure Report](assets/allure-reports.png)
+![Allure Report](assets/Allure-reports.png)
 
 
  ## 📁 Estrutura do Projeto
